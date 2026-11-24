@@ -43,8 +43,11 @@ use std::borrow::Cow;
 
 pub mod get_bits_leaderboard;
 pub mod get_cheermotes;
+pub mod get_custom_power_up;
 
 #[doc(inline)]
 pub use get_bits_leaderboard::{BitsLeaderboard, GetBitsLeaderboardRequest};
 #[doc(inline)]
 pub use get_cheermotes::{Cheermote, GetCheermotesRequest};
+#[doc(inline)]
+pub use get_custom_power_up::{CustomPowerUp, GetCustomPowerUpRequest};

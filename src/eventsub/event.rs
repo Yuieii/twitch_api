@@ -33,6 +33,7 @@ macro_rules! fill_events {
             channel::ChannelChatUserMessageUpdateV1;
             channel::ChannelChatSettingsUpdateV1;
             channel::ChannelCheerV1;
+            channel::ChannelCustomPowerUpRedemptionAddV1;
             channel::ChannelFollowV1;
             channel::ChannelFollowV2;
             channel::ChannelGoalBeginV1;
@@ -207,6 +208,8 @@ make_event_type!("Event Types": pub enum EventType {
     ChannelCharityCampaignStart => "channel.charity_campaign.start",
     "a broadcaster stops a charity campaign.":
     ChannelCharityCampaignStop => "channel.charity_campaign.stop",
+    "a viewer has redeemed a custom power up reward on the specified channel.":
+    ChannelCustomPowerUpRedemptionAdd => "channel.custom_power_up_redemption.add",
     "subscription type sends notifications when a broadcaster updates the category, title, mature flag, or broadcast language for their channel.":
     ChannelUpdate => "channel.update",
     "a specified channel receives a follow.":
@@ -384,6 +387,8 @@ pub enum Event {
     ChannelCharityCampaignStartV1(Payload<channel::ChannelCharityCampaignStartV1>),
     /// Channel Charity Campaign Stop V1 Event
     ChannelCharityCampaignStopV1(Payload<channel::ChannelCharityCampaignStopV1>),
+    /// Channel Custom Power Up Redemption Add V1 Event
+    ChannelCustomPowerUpRedemptionAddV1(Payload<channel::ChannelCustomPowerUpRedemptionAddV1>),
     /// Channel Update V1 Event
     #[deprecated(note = "use `Event::ChannelUpdateV2` instead")]
     ChannelUpdateV1(Payload<channel::ChannelUpdateV1>),

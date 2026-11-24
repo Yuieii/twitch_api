@@ -1786,6 +1786,47 @@ impl<'client, C: crate::HttpClient + Sync + 'client> HelixClient<'client, C> {
             .data)
     }
 
+    /// Get specific custom rewards, see [`get_all_custom_rewards`](HelixClient::get_all_custom_rewards) to get all rewards
+    ///
+    /// # Notes
+    ///
+    /// Takes a max of 50 ids
+    ///
+    /// # Examples
+    ///
+    /// ```rust, no_run
+    /// # #[tokio::main]
+    /// # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
+    /// # let client: helix::HelixClient<'static, twitch_api::client::DummyHttpClient> = helix::HelixClient::default();
+    /// # let token = twitch_oauth2::AccessToken::new("validtoken".to_string());
+    /// # let token = twitch_oauth2::UserToken::from_existing(&client, token, None, None).await?;
+    /// use twitch_api::helix;
+    ///
+    /// let rewards: Vec<helix::bits::CustomPowerUp> = client
+    ///     .get_custom_power_ups("1234", &["8969ec47-55b6-4559-a8fe-3f1fc4e6fe58"][..].into(), &token)
+    ///     .await?;
+    /// # Ok(()) }
+    /// ```
+    // XXX: This function is useless as a stream, since you can never have more than 50 rewards on a channel
+    pub async fn get_custom_power_ups<'b, T>(
+        &'client self,
+        broadcaster_id: impl types::IntoCow<'b, types::UserIdRef> + Send + 'b,
+        ids: &'b types::Collection<'b, types::RewardId>,
+        token: &'client T,
+    ) -> Result<Vec<helix::bits::CustomPowerUp>, ClientError<C>>
+    where
+        T: TwitchToken + Send + Sync + ?Sized,
+    {
+        Ok(self
+            .req_get(
+                helix::bits::GetCustomPowerUpRequest::broadcaster_id(broadcaster_id)
+                    .ids(ids.clone()),
+                token,
+            )
+            .await?
+            .data)
+    }
+
     /// Get information about Twitch content classification labels, see [`get_content_classification_labels_for_locale`](HelixClient::get_content_classification_labels_for_locale) to get the labels in a specific locale.
     ///
     /// # Examples

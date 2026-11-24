@@ -11,6 +11,7 @@ pub mod bits;
 pub mod channel_points_automatic_reward_redemption;
 pub mod channel_points_custom_reward;
 pub mod channel_points_custom_reward_redemption;
+pub mod custom_power_up_redemption;
 pub mod charity_campaign;
 pub mod chat;
 pub mod chat_settings;
@@ -99,6 +100,10 @@ pub use chat::{ChannelChatUserMessageUpdateV1, ChannelChatUserMessageUpdateV1Pay
 pub use chat_settings::{ChannelChatSettingsUpdateV1, ChannelChatSettingsUpdateV1Payload};
 #[doc(inline)]
 pub use cheer::{ChannelCheerV1, ChannelCheerV1Payload};
+#[doc(inline)]
+pub use custom_power_up_redemption::{
+    ChannelCustomPowerUpRedemptionAddV1, ChannelCustomPowerUpRedemptionAddV1Payload
+};
 #[doc(inline)]
 pub use follow::{ChannelFollowV1, ChannelFollowV1Payload};
 #[doc(inline)]
